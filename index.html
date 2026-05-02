@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Risk Calculator</title>
+
+  <link rel="manifest" href="manifest.json">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+
+<body>
+
+<h2>Risk Calculator</h2>
+
+<input id="entry" placeholder="Entry Price">
+<input id="stop" placeholder="Stop Loss">
+
+<button onclick="calculate()">Calculate</button>
+
+<p id="result"></p>
+
+<script>
+function calculate() {
+    let D3 = Number(document.getElementById("entry").value);
+    let E3 = Number(document.getElementById("stop").value);
+
+    let diff = Math.abs(D3 - E3);
+    let result;
+
+    if (D3 - E3 > 0) {
+        result = D3 - (diff * 0.92);
+    } else {
+        result = D3 + (diff * 0.92);
+    }
+
+    document.getElementById("result").innerText = result;
+}
+
+// register service worker
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('service-worker.js');
+}
+</script>
+
+</body>
+</html>
